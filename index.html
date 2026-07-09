@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pole Figure Texture Analyzer (CryTex-P)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <div class="controls">
+          <div class="brand">
+            <p class="eyebrow">Pole Figure Texture Analyzer</p>
+            <h1>CryTex-P.AI</h1>
+          </div>
+
+          <div class="upload-stack">
+            <label class="upload-box" for="image100">
+              <span class="upload-icon">+</span>
+              <span class="upload-title">{100} pole figure</span>
+              <span id="fileName100" class="upload-meta">PNG, JPG, or JPEG</span>
+              <input id="image100" data-family="100" type="file" accept="image/png,image/jpeg,image/jpg" />
+            </label>
+            <label class="upload-box" for="image110">
+              <span class="upload-icon">+</span>
+              <span class="upload-title">{110} pole figure</span>
+              <span id="fileName110" class="upload-meta">PNG, JPG, or JPEG</span>
+              <input id="image110" data-family="110" type="file" accept="image/png,image/jpeg,image/jpg" />
+            </label>
+            <label class="upload-box" for="image111">
+              <span class="upload-icon">+</span>
+              <span class="upload-title">{111} pole figure</span>
+              <span id="fileName111" class="upload-meta">PNG, JPG, or JPEG</span>
+              <input id="image111" data-family="111" type="file" accept="image/png,image/jpeg,image/jpg" />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Minimum MRD</span>
+              <input id="minMrd" type="number" min="0" step="0.1" value="1.0" />
+            </label>
+            <label>
+              <span>Maximum MRD</span>
+              <input id="maxMrd" type="number" min="0" step="0.1" value="6.0" />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Angle tolerance</span>
+              <input id="tolerance" type="number" min="1" max="20" step="1" value="8" />
+            </label>
+            <label>
+              <span>MRD cutoff</span>
+              <input id="mrdCutoff" type="number" min="0" step="0.1" value="1.0" />
+            </label>
+          </div>
+
+          <button id="analyzeBtn" class="primary-action" disabled>Analyze all three</button>
+          <p id="statusText" class="status">Upload {100}, {110}, and {111} pole figures to begin.</p>
+        </div>
+
+        <div class="visual-panel">
+          <div class="preview-grid">
+            <div class="preview-card">
+              <div class="preview-title">{100}</div>
+              <canvas id="canvas100" width="640" height="640"></canvas>
+            </div>
+            <div class="preview-card">
+              <div class="preview-title">{110}</div>
+              <canvas id="canvas110" width="640" height="640"></canvas>
+            </div>
+            <div class="preview-card">
+              <div class="preview-title">{111}</div>
+              <canvas id="canvas111" width="640" height="640"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="results-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Possible Textures</h2>
+            <button id="downloadRanking" class="ghost-action" disabled>Download ranking</button>
+          </div>
+          <div id="textureList" class="texture-list empty-state">No analysis yet.</div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Detected Spots</h2>
+            <button id="downloadSummary" class="ghost-action" disabled>Download summary</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Label</th>
+                  <th>Pole Figure</th>
+                  <th>RD</th>
+                  <th>TD</th>
+                  <th>Distance</th>
+                  <th>Theta 1</th>
+                  <th>Theta 2</th>
+                  <th>MRD</th>
+                  <th>Textured</th>
+                </tr>
+              </thead>
+              <tbody id="spotsBody">
+                <tr><td colspan="9">No spots detected yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Filtered Texture Summary</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Texture Notation</th>
+                <th>Texture Name</th>
+                <th>Spot 100</th>
+                <th>Spot 110</th>
+                <th>Spot 111</th>
+                <th>Total Occurrences</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="summaryBody">
+              <tr><td colspan="7">No texture summary yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

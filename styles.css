@@ -22,16 +22,16 @@ body {
 }
 
 .app-shell {
-  width: min(1440px, calc(100% - 32px));
+  width: min(1600px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 24px 0 40px;
+  padding: clamp(16px, 2vw, 24px) 0 40px;
 }
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
-  gap: 16px;
-  align-items: stretch;
+  grid-template-columns: minmax(300px, 360px) 1fr;
+  gap: clamp(16px, 2vw, 24px);
+  align-items: start;
 }
 
 .controls,
@@ -56,7 +56,7 @@ body {
 }
 
 .brand h1 {
-  font-size: 30px;
+  font-size: clamp(26px, 3vw, 38px);
   line-height: 1.1;
 }
 
@@ -129,7 +129,7 @@ label span {
 
 input[type="number"] {
   width: 100%;
-  height: 42px;
+  min-height: 44px;
   padding: 0 10px;
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -137,7 +137,7 @@ input[type="number"] {
 }
 
 button {
-  height: 42px;
+  min-height: 44px;
   border: 0;
   border-radius: 6px;
   font: inherit;
@@ -174,8 +174,8 @@ button:disabled {
 
 .preview-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
   height: 100%;
 }
 
@@ -195,10 +195,10 @@ button:disabled {
 
 canvas {
   width: 100%;
-  height: 100%;
-  min-height: 320px;
-  max-height: 72vh;
+  height: auto;
   aspect-ratio: 1 / 1;
+  min-height: 280px;
+  max-height: 72vh;
   object-fit: contain;
   background: #ffffff;
   border-radius: 6px;
@@ -275,7 +275,9 @@ canvas {
 }
 
 .table-wrap {
-  overflow: auto;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 table {
@@ -308,34 +310,117 @@ th {
   font-weight: 800;
 }
 
-@media (max-width: 920px) {
-  .workspace,
-  .results-grid {
-    grid-template-columns: 1fr;
-  }
+/* ---------- Large Desktop ---------- */
 
-  .preview-grid {
-    grid-template-columns: 1fr;
-  }
+@media (min-width:1600px){
 
-  .brand h1 {
-    font-size: 26px;
-  }
+.app-shell{
+    max-width:1700px;
 }
 
-@media (max-width: 560px) {
-  .app-shell {
-    width: min(100% - 20px, 1440px);
-    padding-top: 10px;
-  }
+.preview-grid{
+    gap:24px;
+}
 
-  .field-grid,
-  .texture-item {
-    grid-template-columns: 1fr;
-  }
+canvas{
+    max-height:700px;
+}
 
-  .panel-head {
-    align-items: flex-start;
-    flex-direction: column;
-  }
+}
+
+/* ---------- Laptop ---------- */
+
+@media (max-width:1200px){
+
+.workspace{
+    grid-template-columns:320px 1fr;
+}
+
+.preview-grid{
+    grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width:992px){
+
+.workspace{
+    grid-template-columns:1fr;
+}
+
+.results-grid{
+    grid-template-columns:1fr;
+}
+
+.preview-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.brand h1{
+    font-size:30px;
+}
+
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width:768px){
+
+.app-shell{
+    width:min(100% - 20px,1600px);
+}
+
+.preview-grid{
+    grid-template-columns:1fr;
+}
+
+.field-grid{
+    grid-template-columns:1fr;
+}
+
+.texture-item{
+    grid-template-columns:1fr;
+}
+
+.panel-head{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+button{
+    width:100%;
+}
+
+canvas{
+    min-height:260px;
+}
+
+}
+
+/* ---------- Small Phones ---------- */
+
+@media (max-width:480px){
+
+.controls{
+    padding:16px;
+}
+
+.brand h1{
+    font-size:24px;
+}
+
+.preview-title{
+    font-size:16px;
+}
+
+.upload-box{
+    min-height:90px;
+}
+
+button{
+    font-size:15px;
+}
+
 }

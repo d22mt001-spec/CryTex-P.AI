@@ -235,7 +235,7 @@ canvas {
 
 .texture-item {
   display: grid;
-  grid-template-columns: 42px 1fr auto;
+  grid-template-columns: 42px 1fr;
   gap: 12px;
   align-items: center;
   padding: 12px;
@@ -263,11 +263,7 @@ canvas {
   font-size: 13px;
 }
 
-.score {
-  font-variant-numeric: tabular-nums;
-  font-weight: 850;
-  color: var(--accent-strong);
-}
+
 
 .empty-state {
   color: var(--muted);

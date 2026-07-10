@@ -414,7 +414,7 @@ function renderResults(result) {
 
   textureList.classList.toggle("empty-state", result.ranking.length === 0);
   textureList.innerHTML = result.ranking.length
-    ? result.ranking.slice(0, 5).map((row, index) => `
+    ? result.ranking.slice(0, 6).map((row, index) => `
       <div class="texture-item">
         <div class="rank">${index + 1}</div>
         <div>

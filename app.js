@@ -414,17 +414,18 @@ function renderResults(result) {
 
   textureList.classList.toggle("empty-state", result.ranking.length === 0);
   textureList.innerHTML = result.ranking.length
-    ? result.ranking.slice(0, 6).map((row, index) => `
+  ? result.ranking.slice(0, 6).map((row, index) => `
       <div class="texture-item">
         <div class="rank">${index + 1}</div>
-        <div>
+
+        <div class="texture-info">
           <div class="texture-name">${escapeHtml(row.texture_name)}</div>
           <div class="texture-notation">${escapeHtml(row.texture_notation)}</div>
         </div>
-        <div class="score">${round(row.predicted_score, 3)}</div>
+
       </div>
     `).join("")
-    : "No filtered texture components matched these pole figures.";
+  : "No filtered texture components matched these pole figures.";
 
   spotsBody.innerHTML = result.spots.length
     ? result.spots.map((spot) => `
@@ -451,7 +452,7 @@ function renderResults(result) {
         <td>${row.spot_count_110}</td>
         <td>${row.spot_count_111}</td>
         <td>${row.total_occurrences}</td>
-        <td>${round(row.predicted_score, 4)}</td>
+        
       </tr>
     `).join("")
     : `<tr><td colspan="7">No filtered texture components matched these pole figures.</td></tr>`;

@@ -375,7 +375,7 @@ function rankTextures(rows) {
     const sc100 = row.spot_count_100 / max100;
     const sc110 = row.spot_count_110 / max110;
     const sc111 = row.spot_count_111 / max111;
-    const rawScore = 0.12 * occ + 0.22 * sc100 + 0.28 * sc110 + 0.42 * sc111 + 0.30 * (sc110 * sc111) + 0.22 * (sc100 * sc111);
+    const rawScore = 0.15 * occ + 0.24 * sc100 + 0.29 * sc110 + 0.45 * sc111 + 0.34 * (sc110 * sc111) + 0.24 * (sc100 * sc111);
     return { ...row, rawScore };
   });
 

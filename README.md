@@ -12,7 +12,7 @@ https://d22mt001-spec.github.io/CryTex-P.AI/
 - Automatic spot detection
 - MRD-based filtering
 - Texture component identification
-- Texture ranking and summary generation
+- Texture summary generation
 - Downloadable results
 
 ## How to Use
@@ -20,4 +20,4 @@ https://d22mt001-spec.github.io/CryTex-P.AI/
 1. Upload all three pole figure images.
 2. Set MRD limits and angle tolerance.
 3. Click "Analyze All Three".
-4. Review detected texture components and rankings.
+4. Review detected texture components.

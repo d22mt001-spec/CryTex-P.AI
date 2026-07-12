@@ -136,6 +136,3 @@ print(f"sc110         = {best_coeffs[2]:.2f}")
 print(f"sc111         = {best_coeffs[3]:.2f}")
 print(f"sc110*sc111   = {best_coeffs[4]:.2f}")
 print(f"sc100*sc111   = {best_coeffs[5]:.2f}")
-
-print("\nR² =",round(best_r2,4))
-print("RMSE =",round(best_rmse,4))

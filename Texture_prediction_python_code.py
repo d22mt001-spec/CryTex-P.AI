@@ -1109,7 +1109,7 @@ df["Predicted_Score"] = best_model.predict(X)
 df_sorted = df.sort_values(by="Predicted_Score", ascending=False)
 
 print("Possible Textures:")
-print(df_sorted[["Texture_Name"]].head(6).to_string(index=False))
+print(df_sorted[["Texture_Name"]].head(4).to_string(index=False))
 
 # Save the prediction result automatically.
 prediction_output_file = "Predicted_Texture_Ranking.xlsx"

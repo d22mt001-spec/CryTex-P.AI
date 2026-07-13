@@ -18,6 +18,6 @@ https://d22mt001-spec.github.io/CryTex-P.AI/
 ## How to Use
 
 1. Upload all three pole figure images.
-2. Set MRD limits and angle tolerance.
+2. Set MRD limits (min and max) and angle tolerance.
 3. Click "Analyze All Three".
 4. Review detected texture components.

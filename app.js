@@ -165,7 +165,7 @@ function createRedMask(imageData) {
     const g = data[i + 1];
     const b = data[i + 2];
     const [h, s, v] = rgbToHsv(r, g, b);
-    if (((h <= 10 || h >= 170) && s >= 50 && v >= 50) || (r > 130 && r > g * 1.35 && r > b * 1.35)) {
+    if (((h <= 10 || h >= 170) && s >= 70 && v >= 50) || (r > 130 && r > g * 1.35 && r > b * 1.35)) {
       mask[p] = 1;
     }
   }

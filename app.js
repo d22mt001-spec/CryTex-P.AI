@@ -88,7 +88,7 @@ function loadImage(file) {
     const img = new Image();
     img.onload = () => resolve(img);
     img.onerror = reject;
-    img.src = URL.createObjectURL(file);
+    img.src = URL.createURL(file);
   });
 }
 
@@ -165,7 +165,7 @@ function createRedMask(imageData) {
     const g = data[i + 1];
     const b = data[i + 2];
     const [h, s, v] = rgbToHsv(r, g, b);
-    if (((h <= 10 || h >= 170) && s >= 70 && v >= 50) || (r > 130 && r > g * 1.35 && r > b * 1.35)) {
+    if (((h <= 20 || h >= 340) && s >= 70 && v >= 50) || (r > 130 && r > g * 1.35 && r > b * 1.35)) {
       mask[p] = 1;
     }
   }
@@ -302,7 +302,7 @@ function matchTextureFamily(spots, familyKey, tolerance) {
       const norm1 = normalizeVector(vec1);
       const norm2 = normalizeVector(vec2);
 
-      for (const [notation, values] of Object.entries(textureFamilies)) {
+      for (const [notation, values] of .entries(textureFamilies)) {
         const plane = normalizeVector(values[1]);
         const direction = normalizeVector(values[2]);
         if (arraysEqual(norm1, plane) && arraysEqual(norm2, direction)) {
@@ -333,8 +333,8 @@ function matchTextureFamily(spots, familyKey, tolerance) {
 
 function combineSummaries(summaries) {
   const combined = {};
-  for (const familySummary of Object.values(summaries)) {
-    for (const [key, item] of Object.entries(familySummary)) {
+  for (const familySummary of .values(summaries)) {
+    for (const [key, item] of .entries(familySummary)) {
       if (!combined[key]) {
         combined[key] = {
           texture_notation: item.texture_notation,
@@ -351,19 +351,19 @@ function combineSummaries(summaries) {
       combined[key].total_occurrences += item.total_occurrences;
     }
   }
-   Object.values(combined);
+   return Object.values(combined);
 }
 
 function filterSummary(rows) {
-   rows.filter((row) => {
+   return rows.filter((row) => {
     const counts = [row.spot_count_100, row.spot_count_110, row.spot_count_111];
     const nonzero = counts.filter((value) => value > 0).length;
-     nonzero >= 2 || counts.some((value) => value >= 3);
+     return nonzero >= 2 || counts.some((value) => value >= 3);
   });
 }
 
 function rankTextures(rows) {
-  if (!rows.length)  [];
+  if (!rows.length) return [];
 
   const maxOcc = Math.max(...rows.map((row) => row.total_occurrences), 1);
   const max100 = Math.max(...rows.map((row) => row.spot_count_100), 1);
@@ -376,11 +376,11 @@ function rankTextures(rows) {
     const sc110 = row.spot_count_110 / max110;
     const sc111 = row.spot_count_111 / max111;
     const rawScore = 0.15 * occ + 0.24 * sc100 + 0.29 * sc110 + 0.45 * sc111 + 0.34 * (sc110 * sc111) + 0.24 * (sc100 * sc111);
-     { ...row, rawScore };
+    return { ...row, rawScore };
   });
 
   const maxScore = Math.max(...scored.map((row) => row.rawScore), 1);
-   scored
+  return scored
     .map((row) => ({ ...row, predicted_score: row.rawScore / maxScore }))
     .sort((a, b) => b.predicted_score - a.predicted_score);
 }
@@ -467,7 +467,7 @@ function generateHklDirections() {
       }
     }
   }
-   directions;
+  return directions;
 }
 
 function findAllMatchesWithFamilies(targetAngle, directions, referenceFamily, tolerance) {
@@ -481,17 +481,17 @@ function findAllMatchesWithFamilies(targetAngle, directions, referenceFamily, to
       }
     }
   }
-   matches;
+  return matches;
 }
 
 function computeAngle(a, b) {
   const denom = magnitude(a) * magnitude(b);
-   degrees(Math.acos(clamp(dot(a, b) / denom, -1, 1)));
+  return degrees(Math.acos(clamp(dot(a, b) / denom, -1, 1)));
 }
 
 function normalizeVector(vec) {
   const divisor = gcd(gcd(Math.abs(vec[0]), Math.abs(vec[1])), Math.abs(vec[2])) || 1;
-   vec.map((value) => Math.abs(Math.trunc(value / divisor))).sort((a, b) => a - b);
+  return vec.map((value) => Math.abs(Math.trunc(value / divisor))).sort((a, b) => a - b);
 }
 
 function rgbToHsv(r, g, b) {
@@ -508,7 +508,7 @@ function rgbToHsv(r, g, b) {
     else h = 60 * ((r - g) / delta + 4);
   }
   if (h < 0) h += 360;
-  return [h / 2, max === 0 ? 0 : (delta / max) * 255, max * 255];
+  return [h, max === 0 ? 0 : (delta / max) * 255, max * 255];
 }
 
 function downloadCsv(filename, rows) {

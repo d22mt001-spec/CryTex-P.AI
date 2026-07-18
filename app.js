@@ -165,7 +165,7 @@ function createRedMask(imageData) {
     const g = data[i + 1];
     const b = data[i + 2];
     const [h, s, v] = rgbToHsv(r, g, b);
-    if (((h <= 10 || h >= 170) && s >= 70 && v >= 50) || (r > 130 && r > g * 1.35 && r > b * 1.35)) {
+    if (((h <= 20 || h >= 340) && s >= 70 && v >= 50) || (r > 130 && r > g * 1.35 && r > b * 1.35)) {
       mask[p] = 1;
     }
   }
@@ -351,19 +351,19 @@ function combineSummaries(summaries) {
       combined[key].total_occurrences += item.total_occurrences;
     }
   }
-  return Object.values(combined);
+   Object.values(combined);
 }
 
 function filterSummary(rows) {
-  return rows.filter((row) => {
+   rows.filter((row) => {
     const counts = [row.spot_count_100, row.spot_count_110, row.spot_count_111];
     const nonzero = counts.filter((value) => value > 0).length;
-    return nonzero >= 2 || counts.some((value) => value >= 3);
+     nonzero >= 2 || counts.some((value) => value >= 3);
   });
 }
 
 function rankTextures(rows) {
-  if (!rows.length) return [];
+  if (!rows.length)  [];
 
   const maxOcc = Math.max(...rows.map((row) => row.total_occurrences), 1);
   const max100 = Math.max(...rows.map((row) => row.spot_count_100), 1);
@@ -376,11 +376,11 @@ function rankTextures(rows) {
     const sc110 = row.spot_count_110 / max110;
     const sc111 = row.spot_count_111 / max111;
     const rawScore = 0.15 * occ + 0.24 * sc100 + 0.29 * sc110 + 0.45 * sc111 + 0.34 * (sc110 * sc111) + 0.24 * (sc100 * sc111);
-    return { ...row, rawScore };
+     { ...row, rawScore };
   });
 
   const maxScore = Math.max(...scored.map((row) => row.rawScore), 1);
-  return scored
+   scored
     .map((row) => ({ ...row, predicted_score: row.rawScore / maxScore }))
     .sort((a, b) => b.predicted_score - a.predicted_score);
 }
@@ -467,7 +467,7 @@ function generateHklDirections() {
       }
     }
   }
-  return directions;
+   directions;
 }
 
 function findAllMatchesWithFamilies(targetAngle, directions, referenceFamily, tolerance) {
@@ -481,17 +481,17 @@ function findAllMatchesWithFamilies(targetAngle, directions, referenceFamily, to
       }
     }
   }
-  return matches;
+   matches;
 }
 
 function computeAngle(a, b) {
   const denom = magnitude(a) * magnitude(b);
-  return degrees(Math.acos(clamp(dot(a, b) / denom, -1, 1)));
+   degrees(Math.acos(clamp(dot(a, b) / denom, -1, 1)));
 }
 
 function normalizeVector(vec) {
   const divisor = gcd(gcd(Math.abs(vec[0]), Math.abs(vec[1])), Math.abs(vec[2])) || 1;
-  return vec.map((value) => Math.abs(Math.trunc(value / divisor))).sort((a, b) => a - b);
+   vec.map((value) => Math.abs(Math.trunc(value / divisor))).sort((a, b) => a - b);
 }
 
 function rgbToHsv(r, g, b) {
@@ -508,7 +508,7 @@ function rgbToHsv(r, g, b) {
     else h = 60 * ((r - g) / delta + 4);
   }
   if (h < 0) h += 360;
-  return [h / 2, max === 0 ? 0 : (delta / max) * 255, max * 255];
+  return [h, max === 0 ? 0 : (delta / max) * 255, max * 255];
 }
 
 function downloadCsv(filename, rows) {

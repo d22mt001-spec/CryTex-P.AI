@@ -165,7 +165,7 @@ function createRedMask(imageData) {
     const g = data[i + 1];
     const b = data[i + 2];
     const [h, s, v] = rgbToHsv(r, g, b);
-    if (((h <= 20 || h >= 340) && s >= 70 && v >= 50) || (r > 130 && r > g * 1.35 && r > b * 1.35)) {
+    if (((h <= 10 || h >= 170) && s >= 70 && v >= 50) || (r > 130 && r > g * 1.35 && r > b * 1.35)) {
       mask[p] = 1;
     }
   }
@@ -508,7 +508,7 @@ function rgbToHsv(r, g, b) {
     else h = 60 * ((r - g) / delta + 4);
   }
   if (h < 0) h += 360;
-  return [h, max === 0 ? 0 : (delta / max) * 255, max * 255];
+  return [h / 2, max === 0 ? 0 : (delta / max) * 255, max * 255];
 }
 
 function downloadCsv(filename, rows) {
